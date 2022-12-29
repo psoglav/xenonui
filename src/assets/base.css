@@ -5,3 +5,6 @@
   margin: 0;
 }
 
+html, body {
+  background-color: black;
+}

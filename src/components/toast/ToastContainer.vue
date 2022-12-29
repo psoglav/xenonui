@@ -6,7 +6,21 @@ const state = useState()
 </script>
 
 <template>
-  <div class="toast-container">
-    
-  </div>
+  <teleport to="body" :disabled="!state.length">
+    <div class="toast-container">
+      <toast-item v-for="(item, i) in state" :key="i" :message="item.message" />
+    </div>
+  </teleport>
 </template>
+
+<style>
+  .toast-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: .5rem;
+  }
+</style>

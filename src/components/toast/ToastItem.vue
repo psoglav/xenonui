@@ -14,6 +14,11 @@ defineProps<ToastProps>()
 
 <style lang="scss">
   .toast-item {
-
+    padding: 1rem;
+    background-color: #121212;
+    font-family: Inter, sans-serif;
+    border-radius: .5rem;
+    color: white;
+    border: 1px gray solid;
   }
 </style>
