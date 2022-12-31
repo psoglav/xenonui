@@ -1,21 +1,27 @@
-import { ref } from "vue"
+import { ref, watch, h, render } from "vue"
+import type { VNode } from "vue"
+import type { ToastModel, ToastOptions, ToastPosition } from "./types"
+import Toast from "./Toast.vue"
+import type { ToastProps } from "./Toast.vue"
 
-export interface ToastModel {
-  message: string
-  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+const instances = ref<ToastProps[]>([])
+
+const defaultOptions: ToastOptions = {
+  position: "bottom-right"
 }
 
-const state = ref<ToastModel[]>([])
-
-export const useState = () => state
-
-export const useToast = () => {
+export const useToast = (options: ToastOptions = defaultOptions) => {
+  options = { ...defaultOptions, ...options }
   return {
     fire(msg: string) {
-      state.value.push({
-        message: msg,
-        position: 'bottom-right'
-      })
-    },
+      let item = { message: msg }
+      instances.value.push(item)
+      let vnode = h(
+        "div",
+        { class: ["toast-container", "toast-container--" + options.position] },
+        instances.value.map((i) => h(Toast, i))
+      )
+      render(vnode, document.body)
+    }
   }
 }

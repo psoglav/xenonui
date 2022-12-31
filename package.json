@@ -1,7 +1,23 @@
 {
-  "name": "xenoui",
+  "name": "xenonui",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/xenonui.umd.cjs",
+  "module": "./dist/xenonui.js",
+  "exports": {
+    ".": {
+      "import": "./dist/xenonui.js",
+      "require": "./dist/xenonui.umd.cjs"
+    },
+    "./css": {
+      "import": {
+        "node": "./dist/style.css",
+        "default": "./dist/style.css"
+      }
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
